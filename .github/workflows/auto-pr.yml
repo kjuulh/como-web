@@ -1,4 +1,4 @@
-name: Staging Auto-PR
+name: Development Auto-PR
 on:
   create:
     branches: ['development']
