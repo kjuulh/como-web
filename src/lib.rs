@@ -1,4 +1,6 @@
+pub mod api;
 pub mod app;
+pub mod fallback;
 use cfg_if::cfg_if;
 
 cfg_if! {
