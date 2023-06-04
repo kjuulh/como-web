@@ -13,17 +13,13 @@ scripts:
     type: shell
   local_down:
     type: shell
-  run_como:
-    type: shell
-  migrate_como:
-    type: shell
-  new_migration:
-    type: shell
-    args:
-      name:
-        type: "env"
-        key: "name"
   "tailwind:watch": 
     type: "shell"
   "tailwind:build": 
+    type: "shell"
+  "leptos:dev": 
+    type: "shell"
+  "dev": 
+    type: "shell"
+  "nodev": 
     type: "shell"
