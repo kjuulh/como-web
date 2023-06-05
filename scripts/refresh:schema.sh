@@ -7,10 +7,6 @@ graphql-client introspect-schema \
 
 graphql-client generate \
   --schema-path src/api/graphql/schema/schema.json \
-  src/api/graphql/schema/mutations.graphql \
-  --output-directory src/api/graphql/gen
-
-graphql-client generate \
-  --schema-path src/api/graphql/schema/schema.json \
-  src/api/graphql/schema/queries.graphql \
-  --output-directory src/api/graphql/gen
+  src/features/navbar_projects/graphql/queries.graphql \
+  --output-directory src/features/navbar_projects/gen \
+  --custom-scalars-module='crate::common::graphql'

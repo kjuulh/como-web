@@ -1,0 +1,6 @@
+query GetProjectsListView {
+  getProjects {
+    id
+    name
+  }
+}
