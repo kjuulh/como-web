@@ -1,12 +1,13 @@
 use leptos::*;
 use leptos_router::*;
 
+use crate::features::command_line::CommandLine;
 use crate::features::navbar_projects::NavbarProjects;
 
 #[component]
 pub fn DashNav(cx: Scope) -> impl IntoView {
     view! { cx,
-        <nav class="absolute min-w-[200px] p-4 space-y-4 h-screen sticky top-0 select-none">
+        <nav class="min-w-[200px] p-4 space-y-4 h-screen sticky top-0 select-none bg-gray-800">
             <div>
                 <a href="/dash/home" class="text-xl">
                     "como"
@@ -38,8 +39,10 @@ pub fn DashboardLayout(cx: Scope) -> impl IntoView {
     view! { cx,
         <div class="flex flex-row">
             <DashNav/>
-            <div id="content" class="p-2">
-                <Outlet/>
+            <div id="content" class="px-0.5 flex-grow">
+                <CommandLine>
+                    <Outlet/>
+                </CommandLine>
             </div>
         </div>
     }

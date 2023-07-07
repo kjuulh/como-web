@@ -28,7 +28,7 @@ pub fn FeaturesView(cx: Scope) -> impl IntoView {
 
     view! { cx,
         <div>
-            <div class="space-y-5">
+            <div class="space-y-5 p-2">
                 <h1>"NavbarProjects"</h1>
                 <h2>"Projects"</h2>
                 <div class="feature-case">

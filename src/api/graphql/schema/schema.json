@@ -767,7 +767,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "ProjectDto",
+                  "name": "Project",
                   "ofType": null
                 }
               }
@@ -789,7 +789,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "ProjectDto",
+                      "name": "Project",
                       "ofType": null
                     }
                   }

@@ -1,6 +1,5 @@
 use graphql_client::{GraphQLQuery, Response};
 use leptos::*;
-use leptos_router::*;
 
 use crate::features::navbar_projects::gen::queries::get_projects_list_view::{
     ResponseData, Variables,
@@ -18,7 +17,10 @@ pub async fn get_projects_list() -> anyhow::Result<Vec<GetProjectsListViewGetPro
         .send()
         .await?;
     let response_body: Response<ResponseData> = res.json().await?;
-    Ok(response_body.data.unwrap().get_projects)
+    Ok(response_body
+        .data
+        .ok_or(anyhow::anyhow!("failed to get projects list"))?
+        .get_projects)
 }
 
 #[component]
@@ -38,7 +40,10 @@ pub fn NavbarProjectsView(
                 .map(|project| {
                     view! { cx,
                         <a href=format!("/dash/project/{}", & project.id) class="project-item">
-                            <div class="project-item-name hover:dark:bg-blue-700 rounded-md p-0.5 px-2">
+
+
+
+                               <div class="project-item-name hover:dark:bg-blue-700 rounded-md p-0.5 px-2">
                                 {&project.name}
                             </div>
                         </a>

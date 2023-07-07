@@ -1,3 +1,3 @@
 #!/bin/bash
 
-tmux kill-session -t dev || true
+tmux kill-window -t dev || true

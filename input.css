@@ -12,3 +12,15 @@ html, body {
 .feature-case {
   @apply m-8 border-blue-700 border-2 rounded-lg p-4;
 }
+
+.dashboard-list-item {
+  @apply flex flex-col justify-center hover:dark:bg-blue-900 cursor-pointer select-none px-4 py-2 border-y border-y-gray-800;
+}
+
+.dashboard-list-project {
+  @apply dark:bg-gray-800 hover:dark:bg-blue-900 text-gray-300;
+}
+
+.dashboard-item {
+  @apply pl-6
+}

@@ -17,14 +17,14 @@ pub mod get_projects_list_view {
     #[allow(dead_code)]
     type ID = String;
     type UUID = crate::common::graphql::UUID;
-    #[derive(Serialize)]
+    #[derive(Serialize, Clone, Debug)]
     pub struct Variables;
-    #[derive(Deserialize)]
+    #[derive(Deserialize, Clone, Debug)]
     pub struct ResponseData {
         #[serde(rename = "getProjects")]
         pub get_projects: Vec<GetProjectsListViewGetProjects>,
     }
-    #[derive(Deserialize)]
+    #[derive(Deserialize, Clone, Debug)]
     pub struct GetProjectsListViewGetProjects {
         pub id: UUID,
         pub name: String,
