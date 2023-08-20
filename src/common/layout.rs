@@ -7,7 +7,7 @@ use crate::features::navbar_projects::NavbarProjects;
 #[component]
 pub fn DashNav(cx: Scope) -> impl IntoView {
     view! { cx,
-        <nav class="min-w-[200px] p-4 space-y-4 h-screen sticky top-0 select-none bg-gray-800">
+        <nav class="min-w-[200px] p-4 space-y-4 h-screen max-h-screen sticky top-0 select-none bg-gray-800 overflow-auto">
             <div>
                 <a href="/dash/home" class="text-xl">
                     "como"

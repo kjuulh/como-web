@@ -1,11 +1,12 @@
-use leptos::*;
+use leptos::{ev, html::*, *};
 use uuid::Uuid;
 
 use crate::features::navbar_projects::gen::queries::get_projects_list_view::GetProjectsListViewGetProjects;
-use crate::features::navbar_projects::NavbarProjectsView;
+use crate::features::navbar_projects::{
+    NavbarProjects, NavbarProjectsProps, NavbarProjectsView, NavbarProjectsViewProps,
+};
 
-#[component]
-pub fn FeaturesView(cx: Scope) -> impl IntoView {
+pub fn features_view(cx: Scope) -> impl IntoView {
     let projects = create_local_resource(
         cx,
         || (),
@@ -26,19 +27,22 @@ pub fn FeaturesView(cx: Scope) -> impl IntoView {
     let emptyProjects: Resource<(), Vec<GetProjectsListViewGetProjects>> =
         create_local_resource(cx, || (), |_| async { Vec::new() });
 
-    view! { cx,
-        <div>
-            <div class="space-y-5 p-2">
-                <h1>"NavbarProjects"</h1>
-                <h2>"Projects"</h2>
-                <div class="feature-case">
-                    <NavbarProjectsView projects=projects/>
-                </div>
-                <h2>"no projects"</h2>
-                <div class="feature-case">
-                    <NavbarProjectsView projects=emptyProjects/>
-                </div>
-            </div>
-        </div>
-    }
+    return div(cx).child(
+        div(cx)
+            .classes("space-y-5 p-2")
+            .child(h1(cx).child("NavbarProjects"))
+            .child(h2(cx).child("Projects"))
+            .child(
+                div(cx)
+                    .classes("feature-case")
+                    .child(NavbarProjectsView(cx, NavbarProjectsViewProps { projects })),
+            )
+            .child(h2(cx).child("no projects"))
+            .child(div(cx).classes("feature-case").child(NavbarProjectsView(
+                cx,
+                NavbarProjectsViewProps {
+                    projects: emptyProjects,
+                },
+            ))),
+    );
 }

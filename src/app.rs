@@ -4,7 +4,7 @@ use leptos_router::*;
 
 use crate::common::layout::DashboardLayout;
 use crate::routes::dash::home::DashHomePage;
-use crate::routes::features_view::FeaturesView;
+use crate::routes::features_view::features_view;
 use crate::routes::home::HomePage;
 
 #[component]
@@ -45,7 +45,7 @@ pub fn App(cx: Scope) -> impl IntoView {
                     <Route
                         path="/features"
                         view=|cx| {
-                            view! { cx, <FeaturesView/> }
+                            features_view(cx)
                         }
                     />
                 </Routes>

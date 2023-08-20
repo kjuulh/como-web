@@ -30,7 +30,6 @@ pub fn NavbarProjectsView(
 ) -> impl IntoView {
     let projects_view = move || {
         projects.with(cx, |projects| {
-
             if projects.is_empty() {
                 return vec![view! { cx, <div class="project-item">"No projects"</div> }.into_any()];
             }
@@ -40,9 +39,6 @@ pub fn NavbarProjectsView(
                 .map(|project| {
                     view! { cx,
                         <a href=format!("/dash/project/{}", & project.id) class="project-item">
-
-
-
                                <div class="project-item-name hover:dark:bg-blue-700 rounded-md p-0.5 px-2">
                                 {&project.name}
                             </div>

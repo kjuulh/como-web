@@ -62,19 +62,19 @@ pub fn DashboardListView(
                 .filter(|project| !project.items.is_empty())
                 .map(|project| {
                     view! { cx,
-                    <div>
-                        <DashboardProjectItemView project=project.clone()/>
-                        {&project
-                            .items
-                            .clone()
-                            .into_iter()
-                            .map(|item| {
-                                view! { cx, <DashboardItemView item=item/> }
-                            })
-                            .collect::<Vec<_>>()
-                            .into_view(cx)}
-                    </div>
-                }
+                        <div>
+                            <DashboardProjectItemView project=project.clone()/>
+                            {&project
+                                .items
+                                .clone()
+                                .into_iter()
+                                .map(|item| {
+                                    view! { cx, <DashboardItemView item=item/> }
+                                })
+                                .collect::<Vec<_>>()
+                                .into_view(cx)}
+                        </div>
+                    }
                     .into_any()
                 })
                 .collect::<Vec<_>>()

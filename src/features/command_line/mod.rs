@@ -22,7 +22,7 @@ pub fn CommandLineModal(cx: Scope) -> impl IntoView {
             if !hidden.get() {
                 view! { cx, <CommandLineModalView/> }
             } else {
-                view! { cx,  }
+                view! { cx, <div></div> }.into_view(cx)
             }
         }}
     }
@@ -39,7 +39,7 @@ pub fn CommandLine(cx: Scope, children: Children) -> impl IntoView {
         if event.ctrl_key() {
             match event.code().as_str() {
                 "KeyK" => {
-                    set_hidden(!hidden.get());
+                    //set_hidden(!hidden.get());
                     log!("toggle command")
                 }
                 _ => {}
