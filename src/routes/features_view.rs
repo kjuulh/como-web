@@ -5,9 +5,8 @@ use crate::features::navbar_projects::gen::queries::get_projects_list_view::GetP
 use crate::features::navbar_projects::NavbarProjectsView;
 
 #[component]
-pub fn FeaturesView(cx: Scope) -> impl IntoView {
+pub fn FeaturesView() -> impl IntoView {
     let projects = create_local_resource(
-        cx,
         || (),
         |_| async {
             vec![
@@ -24,9 +23,9 @@ pub fn FeaturesView(cx: Scope) -> impl IntoView {
     );
 
     let emptyProjects: Resource<(), Vec<GetProjectsListViewGetProjects>> =
-        create_local_resource(cx, || (), |_| async { Vec::new() });
+        create_local_resource(|| (), |_| async { Vec::new() });
 
-    view! { cx,
+    view! {
         <div>
             <div class="space-y-5 p-2">
                 <h1>"NavbarProjects"</h1>

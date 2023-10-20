@@ -5,8 +5,8 @@ use crate::features::command_line::CommandLine;
 use crate::features::navbar_projects::NavbarProjects;
 
 #[component]
-pub fn DashNav(cx: Scope) -> impl IntoView {
-    view! { cx,
+pub fn DashNav() -> impl IntoView {
+    view! {
         <nav class="min-w-[200px] p-4 space-y-4 h-screen sticky top-0 select-none bg-gray-800">
             <div>
                 <a href="/dash/home" class="text-xl">
@@ -35,8 +35,8 @@ pub fn DashNav(cx: Scope) -> impl IntoView {
 }
 
 #[component]
-pub fn DashboardLayout(cx: Scope) -> impl IntoView {
-    view! { cx,
+pub fn DashboardLayout() -> impl IntoView {
+    view! {
         <div class="flex flex-row">
             <DashNav/>
             <div id="content" class="px-0.5 flex-grow">

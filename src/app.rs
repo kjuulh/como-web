@@ -8,44 +8,44 @@ use crate::routes::features_view::FeaturesView;
 use crate::routes::home::HomePage;
 
 #[component]
-pub fn App(cx: Scope) -> impl IntoView {
+pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
-    provide_meta_context(cx);
+    provide_meta_context();
 
-    view! { cx,
+    view! {
         <Stylesheet id="leptos" href="/pkg/como_web.css"/>
         <Router>
             <main>
                 <Routes>
                     <Route
                         path=""
-                        view=|cx| {
-                            view! { cx, <HomePage/> }
+                        view=|| {
+                            view! { <HomePage/> }
                         }
                     />
                     <Route
                         path="/dash"
-                        view=|cx| {
-                            view! { cx, <DashboardLayout/> }
+                        view=|| {
+                            view! { <DashboardLayout/> }
                         }
                     >
                         <Route
                             path=""
-                            view=|cx| {
-                                view! { cx, <DashHomePage/> }
+                            view=|| {
+                                view! { <DashHomePage/> }
                             }
                         />
                         <Route
                             path="home"
-                            view=|cx| {
-                                view! { cx, <DashHomePage/> }
+                            view=|| {
+                                view! { <DashHomePage/> }
                             }
                         />
                     </Route>
                     <Route
                         path="/features"
-                        view=|cx| {
-                            view! { cx, <FeaturesView/> }
+                        view=|| {
+                            view! { <FeaturesView/> }
                         }
                     />
                 </Routes>

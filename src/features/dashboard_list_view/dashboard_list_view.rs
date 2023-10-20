@@ -24,17 +24,14 @@ pub async fn get_projects_list() -> anyhow::Result<Vec<GetProjectsListViewGetPro
 }
 
 #[component]
-pub fn DashboardItemView(cx: Scope, item: GetProjectsListViewGetProjectsItems) -> impl IntoView {
-    view! { cx, <div class="dashboard-list-item dashboard-item">{item.title}</div> }
+pub fn DashboardItemView(item: GetProjectsListViewGetProjectsItems) -> impl IntoView {
+    view! { <div class="dashboard-list-item dashboard-item">{item.title}</div> }
 }
 
 #[component]
-pub fn DashboardProjectItemView(
-    cx: Scope,
-    project: GetProjectsListViewGetProjects,
-) -> impl IntoView {
-    view! { cx,
-        <div class="dashboard-list-item dashboard-list-project">
+pub fn DashboardProjectItemView(project: GetProjectsListViewGetProjects) -> impl IntoView {
+    view! {
+       <div class="dashboard-list-item dashboard-list-project">
             <a href=format!("/dash/project/{}", & project.id) class="project-item flex flex-row">
                 <div class="space-x-2">
                     <span>{&project.name}</span>
@@ -48,46 +45,49 @@ pub fn DashboardProjectItemView(
 
 #[component]
 pub fn DashboardListView(
-    cx: Scope,
     projects: Resource<(), Vec<GetProjectsListViewGetProjects>>,
 ) -> impl IntoView {
     let projects_view = move || {
-        projects.with(cx, |projects| {
+        projects.with(|projects| {
+            if projects.is_none() {
+                return Vec::new();
+            }
+            let projects = projects.as_ref().unwrap();
+
             if projects.is_empty() {
-                return vec![view! { cx, <div class="project-item">"No projects"</div> }.into_any()];
+                return vec![view! { <div class="project-item">"No projects"</div> }.into_any()];
             }
 
             projects
                 .into_iter()
                 .filter(|project| !project.items.is_empty())
                 .map(|project| {
-                    view! { cx,
-                    <div>
-                        <DashboardProjectItemView project=project.clone()/>
-                        {&project
-                            .items
-                            .clone()
-                            .into_iter()
-                            .map(|item| {
-                                view! { cx, <DashboardItemView item=item/> }
-                            })
-                            .collect::<Vec<_>>()
-                            .into_view(cx)}
-                    </div>
-                }
+                    view! {
+                        <div>
+                            <DashboardProjectItemView project=project.clone()/>
+                            {&project
+                                .items
+                                .clone()
+                                .into_iter()
+                                .map(|item| {
+                                    view! { <DashboardItemView item=item/> }
+                                })
+                                .collect::<Vec<_>>()
+                                .into_view()}
+                        </div>
+                    }
                     .into_any()
                 })
                 .collect::<Vec<_>>()
         })
     };
 
-    view! { cx, <div class="project-items">{projects_view}</div> }
+    view! {<div class="project-items">{projects_view}</div> }
 }
 
 #[component]
-pub fn DashboardList(cx: Scope) -> impl IntoView {
-    let projects =
-        create_local_resource(cx, || (), |_| async { get_projects_list().await.unwrap() });
+pub fn DashboardList() -> impl IntoView {
+    let projects = create_local_resource(|| (), |_| async { get_projects_list().await.unwrap() });
 
-    view! { cx, <DashboardListView projects=projects/> }
+    view! {<DashboardListView projects=projects/> }
 }

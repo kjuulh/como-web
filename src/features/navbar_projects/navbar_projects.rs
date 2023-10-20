@@ -25,20 +25,24 @@ pub async fn get_projects_list() -> anyhow::Result<Vec<GetProjectsListViewGetPro
 
 #[component]
 pub fn NavbarProjectsView(
-    cx: Scope,
     projects: Resource<(), Vec<GetProjectsListViewGetProjects>>,
 ) -> impl IntoView {
     let projects_view = move || {
-        projects.with(cx, |projects| {
+        projects.with(|projects| {
+            if projects.is_none() {
+                return Vec::new()
+            }
+            let projects = projects.as_ref().unwrap();
+
 
             if projects.is_empty() {
-                return vec![view! { cx, <div class="project-item">"No projects"</div> }.into_any()];
+                return vec![view! { <div class="project-item">"No projects"</div> }.into_any()];
             }
 
             projects
                 .into_iter()
                 .map(|project| {
-                    view! { cx,
+                    view! { 
                         <a href=format!("/dash/project/{}", & project.id) class="project-item">
 
 
@@ -53,13 +57,13 @@ pub fn NavbarProjectsView(
         })
     };
 
-    view! { cx, <div class="project-items space-y-1">{projects_view}</div> }
+    view! { <div class="project-items space-y-1">{projects_view}</div> }
 }
 
 #[component]
-pub fn NavbarProjects(cx: Scope) -> impl IntoView {
+pub fn NavbarProjects() -> impl IntoView {
     let projects =
-        create_local_resource(cx, || (), |_| async { get_projects_list().await.unwrap() });
+        create_local_resource(|| (), |_| async { get_projects_list().await.unwrap() });
 
-    view! { cx, <NavbarProjectsView projects=projects/> }
+    view! { <NavbarProjectsView projects=projects/> }
 }

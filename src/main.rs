@@ -18,19 +18,19 @@ async fn main() {
     let addr = conf.leptos_options.site_addr;
     let leptos_options = conf.leptos_options;
     // Generate the list of routes in your Leptos App
-    let routes = generate_route_list(|cx| view! { cx, <App/> }).await;
+    let routes = generate_route_list(App);
 
     como_web::api::register();
 
     let app = Router::new()
         .route("/api/*fn_name", post(leptos_axum::handle_server_fns))
-        .leptos_routes(leptos_options.clone(), routes, |cx| view! { cx, <App/> })
+        .leptos_routes(&leptos_options.clone(), routes, || view! { <App/> })
         .fallback(file_and_error_handler)
-        .layer(Extension(Arc::new(leptos_options)));
+        .with_state(leptos_options);
 
     // run our app with hyper
     // `axum::Server` is a re-export of `hyper::Server`
-    log!("listening on http://{}", &addr);
+    // log!("listening on http://{}", &addr);
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
         .await
