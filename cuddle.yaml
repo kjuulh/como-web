@@ -5,6 +5,17 @@ base: "git@git.front.kjuulh.io:kjuulh/cuddle-rust-plan.git"
 vars:
   service: "como-web"
   deployments: "git@git.front.kjuulh.io:como/deployments.git"
+  registry: "kasperhermansen"
+
+please:
+  project:
+    owner: kjuulh
+    repository: "como-web"
+    branch: main
+  settings:
+    api_url: https://git.front.kjuulh.io  
+
+
 
 scripts:
   render_como_templates:
