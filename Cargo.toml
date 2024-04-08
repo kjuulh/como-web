@@ -40,7 +40,7 @@ anyhow = { version = "1.0.81" }
 
 serde = { workspace = true }
 chrono = { workspace = true }
-uuid = { workspace = true, features = ["v4", "wasm-bindgen", "js", "serde"] }
+uuid = { workspace = true, features = ["v4", "js", "serde"] }
 graphql_client = { version = "0.14.0", features = ["reqwest"] }
 reqwasm = "0.5.0"
 serde_json = "1.0.115"
