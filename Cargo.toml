@@ -36,7 +36,7 @@ tracing-subscriber = { version = "0.3.18", optional = true, features = [
   "env-filter",
 ] }
 tracing = { version = "0.1.40", features = ["log"], optional = true }
-anyhow = { version = "1.0.81" }
+anyhow = { version = "1.0.82" }
 
 serde = { workspace = true }
 chrono = { workspace = true }
